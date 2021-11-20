@@ -1,16 +1,35 @@
-/* Text analyzer to list words and their frequensies. */
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * 
+ * @author Marcus D Anderson
+ *
+ */
+
 public class TxtAnalyzer {
+	
+	/** 
+	 * This program reads input and counts the number of times
+	 * a word occurs. The program has yet to sort the top twenty
+	 * words with the highest frequency.
+	 */
 	static void word_freq(String str) {
+		
+		/**
+		 * Method to read words and count the frequency. 
+		 */
 		
 		Map < String, Integer > mMap = new TreeMap<>();
 		
 		
 		String arr[] = str.split(" ");
+		
+		/**
+		 * A for-loop to check for words and their frequencies.
+		 */
 		
 		int i;
 		for (i = 0; i < arr.length; i++) {
@@ -29,7 +48,13 @@ public class TxtAnalyzer {
 		}
 	}
 	
+	/**
+	 * @param args. A program to read text and count how many times a word occurs.
+	 */
+	
 	public static void main(String[] args) {
+		
+		
 		String str = "Once upon a midnight dreary, while I pondered, weak and weary,\r\n"
 				+ "Over many a quaint and curious volume of forgotten lore—\r\n"
 				+ "While I nodded, nearly napping, suddenly there came a tapping,\r\n"
