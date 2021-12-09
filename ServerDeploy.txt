@@ -1,0 +1,57 @@
+import java.net.*;
+import java.io.*;
+
+public class Server {
+	
+	// At this point, we initialize the socket and the I/O streams.
+	
+		private Socket socket = null;
+		private ServerSocket server = null;
+		private DataInputStream in = null;
+		
+		// Now we create a constructor for the ip address and port
+		
+		public Server(int port) {
+			
+			// Start and connect 
+			try {
+				server = new ServerSocket(port);
+				System.out.println("The server has started");
+				
+				System.out.println("Waiting to accept client ...");
+				
+				socket = server.accept();
+				System.out.println("Client accepted");
+				
+				
+				in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
+				
+				String line = "";
+				
+				while (!line.equals("None")) {
+					try {
+						line = in.readUTF();
+						System.out.println(line);
+					}
+					catch(IOException y) {
+						
+						System.out.println(y);
+					}
+				}
+						System.out.println("Closing connection");
+						
+						socket.close();
+						in.close();
+					}
+					catch(IOException y) {
+						System.out.println(y);
+					}
+				}
+				
+
+	public static void main(String[] args) {
+		
+		Server server = new Server(5000);
+	}
+		
+}

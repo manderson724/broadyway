@@ -1,0 +1,72 @@
+// Here we have the client side.
+
+import java.net.*;
+import java.io.*;
+
+public class Client {
+	
+	// At this point, we initialize the socket and the I/O streams.
+	
+	private Socket socket = null;
+	private DataInputStream input = null;
+	private DataOutputStream out = null;
+	
+	// Now we create a constructor for the ip address and port
+	
+	public Client(String address, int port) {
+		
+		// Try-catch block is used to establish a connection.
+		try {
+			socket = new Socket(address, port);
+			System.out.println("You are now connected.");
+			
+			input = new DataInputStream(System.in);
+			
+			// We now send the output to the socket.
+			
+			out = new DataOutputStream(socket.getOutputStream());
+		}
+		
+		catch(UnknownHostException n) {
+			System.out.println(n);
+		}
+		
+		catch(IOException y) {
+			System.out.println(y);
+		}
+		
+		// Reads from input.
+		String line = "";
+		
+		while (!line.equals("None")) {
+			
+			try {
+				line = input.readLine();
+				out.writeUTF(line);
+			}
+			
+			catch(IOException y) {
+				System.out.println( y);
+			}
+		}
+		
+		// Close the connection.
+		try {
+			input.close();
+			out.close();
+			socket.close();	
+		}
+		
+		catch(IOException y) {
+			System.out.println(y);
+		}
+	}
+
+	public static void main(String[] args) {
+		
+		Client client = new Client("127.0.0.1", 5000);
+		
+
+	}
+
+}
